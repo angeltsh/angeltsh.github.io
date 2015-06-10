@@ -1,2 +1,2 @@
 # angeltsh.github.io
-angeltsh的个人主页
+You only live once, but if you do it right, once is enough.
