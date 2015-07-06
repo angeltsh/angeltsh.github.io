@@ -11,8 +11,28 @@
 </head>
 <body>
 <section class="main-content">
-  <h3><a href="/sql/adv-select.htm">高级查询</a></h3>
-  <h3><a href="/sql/stored-procedure.htm">存储过程</a></h3>
+  <h3><a href="/sql/adv-select.html">高级查询</a></h3>
+  <h3><a href="/sql/stored-procedure.html">存储过程</a></h3>
+  <h3>SQL 对大小写不敏感</h3>
+  <div>
+    <h4>数据操作语言(DML)</h4>
+    <ul>
+      <li>SELECT</li>
+	  <li>UPDATE</li>
+	  <li>DELETE</li>
+	  <li>INSERT INTO</li>
+    </ul>
+	<h4>数据定义语言(DDL)</h4>
+    <ul>
+      <li>CREATE DATABASE</li>
+	  <li>ALTER DATABASE</li>
+	  <li>CREATE TABLE</li>
+	  <li>ALTER TABLE</li>
+	  <li>DROP TABLE </li>
+	  <li>CREATE INDEX</li>
+	  <li>DROP INDEX</li>
+    </ul>
+  </div>
   <div>
     <h4>创建数据库</h4>
     <pre><code>
@@ -28,7 +48,7 @@
   <div>
     <h4>创建新表</h4>
     <pre><code>
-     create table tabname(col1 type1 [not null] [primary key],col2 type2 [not null],..)
+     create table tabname(cli1 type1 [not null] [primary key],cli2 type2 [not null],..)
     </code>
 	<code>
 	CREATE TABLE `user_user` (
@@ -36,7 +56,7 @@
 	`username` VARCHAR(50) NULL DEFAULT '0' COMMENT '用户名',
 	`userpass` VARCHAR(50) NULL DEFAULT '0' COMMENT '密码',
 	`name` VARCHAR(30) NULL DEFAULT '0' COMMENT '真实姓名',
-	`roleId` INT(10) NULL DEFAULT '0' COMMENT '角色编号',
+	`rlieId` INT(10) NULL DEFAULT '0' COMMENT '角色编号',
 	`departmentId` INT(10) NULL DEFAULT '0' COMMENT '部门编号',
 	`state` INT(1) NULL DEFAULT '1' COMMENT '信息状态',
 	`staff` VARCHAR(100) NULL DEFAULT NULL COMMENT '关系',
@@ -45,32 +65,34 @@
 	`phone` VARCHAR(100) NULL DEFAULT NULL COMMENT '手机',
 	`d1` INT(1) NULL DEFAULT '1',
 	`vacation` INT(1) NULL DEFAULT '1', PRIMARY KEY (`keyId`)
-) COMMENT='用户表' COLLATE='utf8_general_ci' ENGINE=MyISAM AUTO_INCREMENT=132;
+) COMMENT='用户表' CliLATE='utf8_general_ci' ENGINE=MyISAM AUTO_INCREMENT=132;
 	</code>
 	</pre>
   </div>
   <div>
-    <h4>创建数据库</h4>
+    <h4>根据已有的表创建新表</h4>
     <pre><code>
-     CREATE DATABASE database-name
+A：create table tab_new like tab_lid (使用旧表创建新表)
+B：create table tab_new as select cli1,cli2… from tab_lid definition only
     </code></pre>
   </div>
   <div>
-    <h4>创建数据库</h4>
+    <h4>删除新表</h4>
     <pre><code>
-     CREATE DATABASE database-name
+     DROP TABLE table-name
     </code></pre>
   </div>
   <div>
-    <h4>创建数据库</h4>
+    <h4>增加一个列</h4>
+    <p>注：列增加后将不能删除。DB2中列加上后数据类型也不能改变，唯一能改变的是增加varchar类型的长度。</p>
     <pre><code>
-     CREATE DATABASE database-name
+     ALTER TABLE table-name ADD CliUMN cli-name cli-type
     </code></pre>
   </div>
   <div>
-    <h4>创建数据库</h4>
+    <h4>添加主键</h4>
     <pre><code>
-     CREATE DATABASE database-name
+     Alter table tabname add primary key(cli)
     </code></pre>
   </div>
 </section>
