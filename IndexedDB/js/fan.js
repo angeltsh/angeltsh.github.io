@@ -1,3 +1,17 @@
+// 本地数据清理
+function clearLocalStorage(){
+    //资产负债表用到的临时数据
+    localStorage.removeItem("fan_zcfzb_tj_zzc");
+    
+    //利润表用到的临时数据
+    localStorage.removeItem("fan_lrb_tj_zlr"); 
+    
+    //现金流量表用到的临时数据
+    localStorage.removeItem("fan_xjllb_tj_zxj");
+
+}
+clearLocalStorage();
+
 //**********资产负债表
 function fan_addToTable_zcfzb(obj){
     var total =parseFloat(localStorage.getItem("fan_zcfzb_tj_zzc"));
@@ -203,20 +217,3 @@ function fan_addData(position=-1){
         fan_addToTable_xjllb(o);
     }
 }
-
-
-
-
-// 本地数据清理
-function clearLocalStorage(){
-    //资产负债表用到的临时数据
-    localStorage.removeItem("fan_zcfzb_tj_zzc");
-    
-    //利润表用到的临时数据
-    localStorage.removeItem("fan_lrb_tj_zlr"); 
-    
-    //现金流量表用到的临时数据
-    localStorage.removeItem("fan_xjllb_tj_zxj");
-
-}
-clearLocalStorage();
