@@ -1,0 +1,59 @@
+@charset "UTF-8";
+    
+/* 基本样式表 */
+*{
+    font-family:simsun Arial,Courier New,Georgia,Times New Roman,Trebuchet MS,Verdana;
+}
+
+*::-webkit-input-placeholder {
+    color:coral;
+}
+*:-moz-placeholder {
+    /* FF 4-18 */
+    color: coral;
+}
+*::-moz-placeholder {
+    /* FF 19+ */
+    color: coral;
+}
+*:-ms-input-placeholder {
+    /* IE 10+ */
+    color: coral;
+}
+*::placeholder{
+    color: coral;
+}
+
+.main{
+    width:80%;
+    max-width: 1000px;
+    min-width: 500px;
+    margin: 0 auto;
+}
+.clearfix:after{
+    content: "";
+    line-height: 0;
+    height: 0;
+    visibility: hidden;
+    display: block;
+    clear: both;
+}
+.clearfix{
+    zoom: 1;
+}
+
+/*************** 全局样式表 ******************/
+.fan_table{
+    border:6px solid #dddddd;
+}
+.fan_table .fan_title{
+    font-weight: 500;
+    font-size: 1.2em;
+}
+.fan_table tr td{
+    border: 1px solid black;
+    padding: 5px 0;
+    text-align: center;
+    vertical-align: center;
+    min-width: 150px;
+}
