@@ -8,6 +8,8 @@ function clearLocalStorage(){
     
     //现金流量表用到的临时数据
     localStorage.removeItem("fan_xjllb_tj_zxj");
+    
+    alert(localStorage.length);
 
 }
 clearLocalStorage();
