@@ -3,6 +3,7 @@
 /* 基本样式表 */
 *{
     font-family:simsun Arial,Courier New,Georgia,Times New Roman,Trebuchet MS,Verdana;
+    font-size: 16px;
 }
 
 *::-webkit-input-placeholder {
@@ -47,9 +48,17 @@
     border:6px solid #dddddd;
     width: 100%;
 }
-.fan_table .fan_title{
+.fan_table .fan_title th{
     font-weight: 500;
     font-size: 1.2em;
+    border: 1px solid black;
+    background-color: #CCBBCC;
+}
+.fan_table tr:nth-child(even){    
+    background-color: #DDDDDD;
+}
+.fan_table tr:nth-child(odd){     
+    background-color: #FFFFFF;
 }
 .fan_table tr td{
     border: 1px solid black;
