@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css" media="screen">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../stylesheets/github-light.css" media="screen">
+<script src="../js/jquery-2.2.3.min.js"></script>
+</head>
+<body>
+<section class="main-content">
+  <div>
+    <h4>随机名人名言</h4>
+    <h6>-------积跬步，至千里</h6>
+    <pre><code id="mrmy">
+    </code></pre>
+  </div>
+  <footer class="site-footer" id="footer"> </footer>
+</section>
+</body>
+<script>
+	$("#footer").load("/footer.html");
+	
+	function StandardTaxRate(){
+		$.ajax({
+			url: "./mingrenmingyan.xml",
+			dataType: 'xml',
+			type: 'GET',
+			timeout: 2000,
+			error: function(xml){
+				alert("加载XML 文件出错！");
+			},
+			success: function(xml){
+				console.log("........");
+				$(xml).find("taxrate").each(function(i){
+					var oid = $(this).attr("id");
+					var lower = $(this).children("lower").text();
+					var upper = $(this).children("upper").text();
+					var rate = $(this).children("rate").text();
+					var buckle = $(this).children("buckle").text();
+					
+					$("#mrmy").append(xml);
+				});
+			}
+		});
+	}
+	
+	StandardTaxRate();
+</script>
+</html>
