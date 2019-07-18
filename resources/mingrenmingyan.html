@@ -28,9 +28,6 @@
 	function StandardTaxRate(){
 		console.log("nihao");
 		$.get('./mingrenmingyan.xml', function(xml){
-				console.log("开始了");
-				console.log(xml);
-				$("#mrmy").html(xml);
 				$(xml).find("taxrate").each(function(){
 					var $book = $(this);
 					var oid = $(this).attr("id");
@@ -39,8 +36,6 @@
 					var rate = $(this).children("rate").text();
 					var buckle = $(this).children("buckle").text();
 					///后续操作。。。
-
-					console.log($book);
 					$("#mrmy").append($book);
 				});
 			});
