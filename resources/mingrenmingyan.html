@@ -37,13 +37,16 @@
 			success: function(xml){
 				console.log(xml);
 				$("#mrmy").html(xml);
-				$(xml).find("taxrate").each(function(i){
+				$(xml).find("taxrate").each(function(){
+					var $book = $(this);
 					var oid = $(this).attr("id");
 					var lower = $(this).children("lower").text();
 					var upper = $(this).children("upper").text();
 					var rate = $(this).children("rate").text();
 					var buckle = $(this).children("buckle").text();
 					///后续操作。。。
+					
+					$("#mrmy").append($book);
 				});
 			}
 		});
