@@ -15,9 +15,9 @@
   <div>
     <h4>随机名人名言</h4>
     <h6>-------积跬步，至千里</h6>
-    <pre><code id="mrmy">
-    </code></pre>
+    <pre><code></code></pre>
   </div>
+  <div id="mrmy"></div>
   <footer class="site-footer" id="footer"> </footer>
 </section>
 </body>
@@ -36,7 +36,6 @@
 			},
 			success: function(xml){
 				console.log(xml);
-				console.log("nihao2");
 				$("#mrmy").html(xml);
 				$(xml).find("taxrate").each(function(i){
 					var oid = $(this).attr("id");
