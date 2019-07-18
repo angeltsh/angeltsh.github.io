@@ -23,18 +23,11 @@
 </body>
 <script>
 	$("#footer").load("../footer.html");
-	
+
 	function StandardTaxRate(){
 		console.log("nihao");
-		$.ajax({
-			url: "./mingrenmingyan.xml",
-			dataType: 'xml',
-			type: 'GET',
-			timeout: 2000,
-			error: function(xml){
-				alert("加载XML 文件出错！");
-			},
-			success: function(xml){
+		$.get('./mingrenmingyan.xml', function(xml){
+				console.log("开始了");
 				console.log(xml);
 				$("#mrmy").html(xml);
 				$(xml).find("taxrate").each(function(){
@@ -45,14 +38,13 @@
 					var rate = $(this).children("rate").text();
 					var buckle = $(this).children("buckle").text();
 					///后续操作。。。
-					
+
 					console.log($book);
 					$("#mrmy").append($book);
 				});
-			}
-		});
+			});
 	}
-	
+
 	StandardTaxRate();
 </script>
 </html>
