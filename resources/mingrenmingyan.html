@@ -17,7 +17,16 @@
     <h6>-------积跬步，至千里</h6>
     <pre><code></code></pre>
   </div>
-  <div id="mrmy"></div>
+  <div id="mrmy">
+		<fieldset>
+			<legend>
+				<span id="mrmy_author">名人</span>
+			</legend>
+			<p>
+				<b id="mrmy_dimension">名言</b>
+			</p>
+		</fieldset>
+	</div>
   <footer class="site-footer" id="footer"> </footer>
 </section>
 </body>
@@ -25,21 +34,41 @@
 <script>
 	$("#footer").load("../footer.html");
 
-	function StandardTaxRate(){
-		console.log("nihao");
-		$.get('./mingrenmingyan.xml', function(xml){
-				$(xml).find("taxrate").each(function(){
-					var $book = $(this);
-					var oid = $(this).attr("id");
-					var lower = $(this).children("lower").text();
-					var upper = $(this).children("upper").text();
-					var rate = $(this).children("rate").text();
-					var buckle = $(this).children("buckle").text();
-					///后续操作。。。
-					$("#mrmy").append($book);
-				});
-			});
-	}
+	function mrmy() {
+		$.ajax({
+			url : './mingrenmingyan.xml',
+			type : 'GET',
+			dataType : 'xml',
+			cache : false,
+			success : function(xml) {
 
-	StandardTaxRate();
+				var param = $(xml).find("mrmy");
+
+				var target = random(0, param.length);
+
+				console.log(target);
+				if ($(param[target])) {
+					var oid = $(param[target]).children("id").text();
+					var author = $(param[target]).children("author").text();
+					var dimension = $(param[target]).children("dimension")
+							.text();
+					var other = $(param[target]).children("other").text();
+
+					//var str = "<p>作者：<b>" + author + "</b></p>";
+					//str += "<p>内容：<b>" + dimension + "</b></p>";
+
+					$("#mrmy_author").html(author);
+					$("#mrmy_dimension").html(dimension);
+				}
+
+			}
+		});
+
+	}
+	mrmy();
+
+	function random(min, max) {
+		var rand = parseInt(Math.random() * (max - min) + min);
+		return rand;
+	}
 </script>
