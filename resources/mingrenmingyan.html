@@ -13,7 +13,7 @@
 <body>
 <section class="main-content">
   <div>
-    <h4>随机名人名言</h4>
+    <h4>名人名言</h4>
     <h6>-------积跬步，至千里</h6>
     <pre><code></code></pre>
   </div>
@@ -26,6 +26,9 @@
 				<b id="mrmy_dimension">名言</b>
 			</p>
 		</fieldset>
+      <div>
+          <button onclick="mrmy()">换一个</button>
+      </div>
 	</div>
   <footer class="site-footer" id="footer"> </footer>
 </section>
@@ -35,6 +38,7 @@
 	$("#footer").load("../footer.html");
 
 	function mrmy() {
+        console.log("ok");
 		$.ajax({
 			url : './mingrenmingyan.xml',
 			type : 'GET',
