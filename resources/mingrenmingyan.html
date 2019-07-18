@@ -34,7 +34,6 @@
 				alert("加载XML 文件出错！");
 			},
 			success: function(xml){
-				console.log("........");
 				$(xml).find("taxrate").each(function(i){
 					var oid = $(this).attr("id");
 					var lower = $(this).children("lower").text();
