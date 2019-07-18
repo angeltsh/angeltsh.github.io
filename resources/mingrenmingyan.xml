@@ -2,20 +2,34 @@
 <mrmys>
 	<mrmy>
 		<id>1</id>
-		<author>齐齐哈尔</author>
-		<dimension>人无完人</dimension>
+		<author>欧文</author>
+		<dimension>
+            真理惟一可靠的标准就是永远自相符合。
+        </dimension>
 		<other>其他信息</other>
 	</mrmy>
 	<mrmy>
 		<id>2</id>
-		<author>齐齐哈2尔</author>
-		<dimension>人无2完人</dimension>
+		<author>蒙田</author>
+		<dimension>
+            我需要三件东西：爱情友谊和图书。然而这三者之间何其相通！炽热的爱情可以充实图书的内容，图书又是人们最忠实的朋友。
+        </dimension>
 		<other>其他2信息</other>
 	</mrmy>
 	<mrmy>
 		<id>3</id>
-		<author>齐齐哈尔3</author>
-		<dimension>人无3完人</dimension>
+		<author>德奥弗拉斯多</author>
+		<dimension>
+            时间是一切财富中最宝贵的财富。
+        </dimension>
+		<other>其他信息3</other>
+	</mrmy>
+    <mrmy>
+		<id>4</id>
+		<author>巴尔扎克</author>
+		<dimension>
+            过放荡不羁的生活，容易得像顺水推舟，但是要结识良朋益友，却难如登天。
+        </dimension>
 		<other>其他信息3</other>
 	</mrmy>
 </mrmys>
