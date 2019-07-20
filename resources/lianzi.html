@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <title>练字本</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/github-light.css" media="screen">
+    
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    
+    <style>
+        .zitie{
+            width:0px;
+            height:0px;
+            border:40px solid #000;
+            border-top-color:#BCD;
+            border-bottom-color:#DCB;
+            border-left-color:#BDC;
+            border-right-color:#CBD;
+            line-height:0px;
+            padding: 0;
+            margin-left: 5px;
+            display: inline-block;
+            font-family: KaiTi;
+            color: black;
+            
+        }
+        .zitie span{
+            margin-left: -30px;
+            text-align: center;
+            font-size: 60px;
+        }
+    </style>
+</head>
+<body>
+<section class="main-content">
+  <div>
+    <h4>字体练习</h4>
+    <h6>-------积跬步，至千里</h6>
+    <pre><code></code></pre>
+  </div>
+  <div id="mrmy">
+		<fieldset>
+			<legend>
+				<span id="mrmy_author">字体练习册</span>
+			</legend>
+    
+            <select onchange="changeFamily();" id="family">
+                <option selected value="KaiTi">楷体</option>
+                <option value="SimSun">宋体</option>
+                <option value="SimHei">黑体</option>
+                <option value="Microsoft Yahei">微软雅黑</option>
+                <option value="Microsoft JhengHei">微软正黑体</option>
+                <option value="NSimSun">新宋体</option>
+                <option value="FangSong">仿宋</option>
+            </select>
+                        
+            <button onclick="zitie();">手动更新</button>
+            <textarea style="width: 100%; resize: none;" id="content" oninput="zitie();">练习册</textarea>
+            <div id="zitie">
+                
+            </div>
+		</fieldset>
+	</div>
+  <footer class="site-footer" id="footer"> </footer>
+</section>
+</body>
+</html>
+<script>
+	$("#footer").load("../footer.html");
+
+    //展示到字帖模块
+	 function zitie(){
+         var contents = $("#content").val().split("");
+         console.log(contents);
+         var str = "";
+         for(var i=0;i<contents.length;i++){
+             if(contents[i] =="\n"){
+                 str += '<br>';
+             }else{
+                 str += '<p class="zitie">';
+                 str += '<span>'+contents[i]+'</span></p>';
+             }
+         }
+         $("#zitie").html(str);
+         changeFamily();
+     }
+    
+    zitie();
+    
+    //改变字体类型
+    function changeFamily(){
+        var fm = $("#family").val();
+        console.log(fm);
+        $(".zitie").css("font-family",fm);
+    }
+</script>
