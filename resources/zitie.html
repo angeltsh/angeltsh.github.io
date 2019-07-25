@@ -11,28 +11,52 @@
     <link rel="stylesheet" type="text/css" href="../stylesheets/github-light.css" media="screen">
     
     <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/jQuery.print.min.js"></script>
     
     <style>
+        //打印带背景
+        @media print {
+             body{
+                -webkit-print-color-adjust:exact;
+                -moz-print-color-adjust:exact;
+                -ms-print-color-adjust:exact;
+                print-color-adjust:exact;
+            } 
+        }
+
+        .attention{
+            color: coral;
+        }
         .zitie{
-            width:0px;
-            height:0px;
-            border:40px solid #000;
-            border-top-color:#BCD;
-            border-bottom-color:#DCB;
-            border-left-color:#BDC;
-            border-right-color:#CBD;
-            line-height:0px;
+            width: 80px;
+            height: 80px;
             padding: 0;
             margin-left: 5px;
             display: inline-block;
-            font-family: KaiTi;
-            color: black;
-            
+            color: darkgrey;
+            background-image: url(./images/2mzhgg.png);
+            background-size:cover;
+            text-align: center;
         }
         .zitie span{
-            margin-left: -30px;
+            line-height: 80px;
             text-align: center;
-            font-size: 60px;
+            font-size: 72px;
+            margin: auto;
+        }
+        
+        #bg *{
+            height: 50px;
+            line-height: 50px;
+        }
+        #bg span{
+            vertical-align: top;
+        }
+        #bg input[name="bg"]{
+            display: none;
+        }
+        #bg img{
+            margin-left: 5px;
         }
     </style>
 </head>
@@ -49,17 +73,37 @@
 				<span id="mrmy_author">字体练习册</span>
 			</legend>
     
-            <select onchange="changeFamily();" id="family">
-                <option selected value="KaiTi">楷体</option>
-                <option value="SimSun">宋体</option>
-                <option value="SimHei">黑体</option>
-                <option value="Microsoft Yahei">微软雅黑</option>
-                <option value="Microsoft JhengHei">微软正黑体</option>
-                <option value="NSimSun">新宋体</option>
-                <option value="FangSong">仿宋</option>
-            </select>
-                        
-            <button onclick="zitie();">手动更新</button>
+            <p>
+                <span>字体</span>
+                <select onchange="changeFamily();" id="family">
+                    <option selected value="KaiTi">楷体</option>
+                    <option value="SimSun">宋体</option>
+                    <option value="SimHei">黑体</option>
+                    <option value="Microsoft Yahei">微软雅黑</option>
+                    <option value="Microsoft JhengHei">微软正黑体</option>
+                    <option value="NSimSun">新宋体</option>
+                    <option value="FangSong">仿宋</option>
+                </select>
+            </p>
+            
+            <p id="bg">
+                <span>底线样式</span>
+                <label><input type="radio" name="bg"  onclick="changeBackground(this)" value="mzg.jpg"><img src="./images/mzg.jpg"></label>
+                
+                <label><input type="radio" name="bg"  onclick="changeBackground(this)" value="2mzg.jpg"><img src="./images/2mzg.jpg"></label>
+                
+                <label><input type="radio" name="bg"  onclick="changeBackground(this)" value="2tzg.png"><img src="./images/2tzg.png"></label>
+                
+                <label><input type="radio" name="bg"  onclick="changeBackground(this)" value="2hgg.png"><img src="./images/2hgg.png"></label>
+                
+                <label><input type="radio" name="bg"  onclick="changeBackground(this)" value="2mzhgg.png"><img src="./images/2mzhgg.png"></label>
+                
+                <label><input type="radio" name="bg"  onclick="changeBackground(this)" value="mzhgg.jpg"><img src="./images/mzhgg.jpg"></label>
+                
+                <!--<button onclick="zitie();">手动更新</button>-->
+            </p>
+            
+            <p><button onclick="printZitiez();">打印字帖</button><span class="attention">请在下方输入字帖内容</span></p>
             <textarea style="width: 100%; resize: none;" id="content" oninput="zitie();">练习册</textarea>
             <div id="zitie">
                 
@@ -72,11 +116,23 @@
 </html>
 <script>
 	$("#footer").load("../footer.html");
+    
+    
+    //初始化加载
+    function initData(){
+        zitie();
+        
+        //初始化背景
+        var obj = $("input[name='bg']:checked");
+        changeBackground(obj);
+    }
+    
+    initData();
 
     //展示到字帖模块
 	 function zitie(){
          var contents = $("#content").val().split("");
-         console.log(contents);
+//         console.log(contents);
          var str = "";
          for(var i=0;i<contents.length;i++){
              if(contents[i] =="\n"){
@@ -90,12 +146,23 @@
          changeFamily();
      }
     
-    zitie();
-    
     //改变字体类型
     function changeFamily(){
         var fm = $("#family").val();
-        console.log(fm);
-        $(".zitie").css("font-family",fm);
+//        console.log(fm);
+        $("#zitie").css("font-family",fm);
     }
+    
+     //改变字体背景图片
+    function changeBackground(obj){
+        var bg = "url(./images/" + $(obj).val() + ")";
+//        console.log(bg);
+        $(".zitie").css("background-image",bg);
+    }
+    
+    //调用打印
+    function printZitiez(){
+        $("#zitie").print();            
+    }
+    
 </script>
