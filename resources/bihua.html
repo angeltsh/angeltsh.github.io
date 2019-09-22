@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <title>字体笔画顺序</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/github-light.css" media="screen">
+    
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/jQuery.print.min.js"></script>
+    
+    <script src="../js/hanzi-writer.min.js"></script>
+        
+    <style>
+        //打印带背景
+        @media print {
+             body{
+                -webkit-print-color-adjust:exact;
+                -moz-print-color-adjust:exact;
+                -ms-print-color-adjust:exact;
+                print-color-adjust:exact;
+            } 
+        }
+        
+        .other{
+            border: solid 1px #dce6f0;
+            background-color: #f3f6fa;
+            padding: 0.8rem;
+            line-height: 1.45;
+            border-radius: 0.3rem;
+            margin: 0.5rem 0;
+        }
+        .attention{
+            color: coral;
+        }
+        
+        .hzstyle{
+            border: 1px solid #CCCCCC;
+            display: inline-block;
+            background-image: url(./images/mzg.jpg);
+            background-size: contain;
+        }
+        
+        #bg *{
+            height: 50px;
+            line-height: 50px;
+        }
+        #bg span{
+            vertical-align: top;
+        }
+        #bg input[name="bg"]{
+            display: none;
+        }
+        #bg img{
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+<section class="main-content">
+  <div>
+    <h4>汉字笔画练习</h4>
+    <h6>-------积跬步，至千里</h6>
+    <div class="other">
+        <p>相关链接</p>
+        <ul>
+            <li><a href="./zitie.html">字帖练习</a></li>
+            <li><a href="./mingrenmingyan.html">名人名言</a></li>
+        </ul>
+        
+        
+        <div>
+            功能实现：
+            //1.输入文字
+            2.选择：汉字书写动画/汉字笔画拆分
+            3.偏旁部首（不太准确）
+            //4.打印功能
+            5.背景图片
+            6.汉字语音
+        </div>
+    </div>
+      
+    <pre><code>注意：目前只支持一种楷体</code></pre>
+  </div>
+    
+    <!--汉字笔画设置-->
+    <div id="myhzbh">
+        <fieldset>
+			<legend>
+				<span id="mrmy_author">汉字笔画设置</span>
+			</legend>
+            
+            <div>
+                <input type="checkbox" name="bh" value="1">笔画拆分
+                <input type="checkbox" name="bh" value="2">书写动画
+                <input type="checkbox" name="bh" value="3">偏旁部首
+                <br>
+            <p id="bg">
+                <span>底线样式</span>
+                <label><input type="radio" name="bg" checked onclick="changeBackground()" value="mzg.jpg"><img src="./images/mzg.jpg"></label>
+                
+                <label><input type="radio" name="bg"  onclick="changeBackground()" value="2mzg.jpg"><img src="./images/2mzg.jpg"></label>
+                
+                <label><input type="radio" name="bg"  onclick="changeBackground()" value="2tzg.png"><img src="./images/2tzg.png"></label>
+                
+                <label><input type="radio" name="bg"  onclick="changeBackground()" value="2hgg.png"><img src="./images/2hgg.png"></label>
+                
+                <label><input type="radio" name="bg"  onclick="changeBackground()" value="2mzhgg.png"><img src="./images/2mzhgg.png"></label>
+                
+                <label><input type="radio" name="bg"  onclick="changeBackground()" value="mzhgg.jpg"><img src="./images/mzhgg.jpg"></label>
+                
+                <!--<button onclick="zitie();">手动更新</button>-->
+            </p>
+            </div>
+            
+            
+            <div>
+                <p><button onclick="printCTT('#myhzbh_show');">打印字帖</button><span class="attention">请在下方输入字帖内容</span></p>
+                <textarea style="width: 100%; resize: none;" id="content" on oninput="bihua();">快试试吧</textarea>
+            </div>
+        </fieldset>
+    </div>
+    
+    <!--汉字笔画展示-->
+    <div id="myhzbh_show">
+        
+    </div>
+    
+    
+    <div id="myhz">
+        <div id="div_hz" class="hzstyle"></div> 
+        <div id="div_hz2" class="hzstyle"></div> 
+        <div id="div_hz3" class="hzstyle"></div>
+
+        <hr>
+        <div id="div_hz4"></div> 
+        
+        <hr>
+        <svg class="hzstyle" xmlns="http://www.w3.org/2000/svg" width="100" height="100" id="div_hz5">
+          <line x1="0" y1="0" x2="100" y2="100" stroke="#DDD" />
+          <line x1="100" y1="0" x2="0" y2="100" stroke="#DDD" />
+          <line x1="50" y1="0" x2="50" y2="100" stroke="#DDD" />
+          <line x1="0" y1="50" x2="100" y2="50" stroke="#DDD" />
+        </svg>
+    </div>
+
+    
+    <footer class="site-footer" id="footer"> </footer>
+</section>
+</body>
+</html>
+<script>
+	$("#footer").load("../footer.html");
+    
+    //初始化加载
+    initData();
+    function initData(){
+        getHanZi("div_hz","我");
+        
+        var writer = getHanZi("div_hz2","想", "#EE00FF","#168F16");
+        writer.animateCharacter();
+        
+        var writer2 =  getHanZi("div_hz3","画", null, "#168F16");
+        writer2.loopCharacterAnimation();
+        
+        writeHanZiByStep("div_hz4","是");
+        
+        getHanZi("div_hz5","酷");
+        
+        
+        //初始化测试内容
+        bihua();
+    }
+    
+    function bihua(){
+        var contents = $("#content").val().split("");
+        
+        //清空显示区域
+        $("#myhzbh_show").html("");
+        
+        //展示条件
+        var obj = $("input[name='bh']:checked");
+        
+        
+        
+        //显示汉字笔画
+        for(var i=0;i<contents.length;i++){
+            var shtml = "";
+            if(contents[i] =="\n"){
+                shtml += '<br>';
+                $("#myhzbh_show").append(shtml);
+            }else{
+                shtml += '<div id="div_'+ i +'" class="hzstyle"></div>';
+                $("#myhzbh_show").append(shtml);
+                var writer = getHanZi("div_" + i , contents[i], "#EE00FF","#168F16"); 
+                writer.loopCharacterAnimation();
+                changeBackground();
+            }
+            
+        }
+       
+    }
+    
+    /*
+    * 书写汉字
+    * @hzid 显示div的id
+    * @strhz 要显示的一个汉字，多个不行，比如：我。
+    * @hzcolor 汉字的主体颜色    
+    * @bscolor 汉字的偏旁部首颜色  
+    */
+    function getHanZi(hzid,strhz,hzcolor,bscolor){
+        var cl_strokeColor = hzcolor?hzcolor:"#333333";
+        var cl_radicalColor = bscolor?bscolor:hzcolor?hzcolor:"#333333";
+        
+        var writer = HanziWriter.create(hzid, strhz, {
+                  width: 80,
+            height: 75,
+            padding: 5,
+            strokeColor:cl_strokeColor,
+            radicalColor:cl_radicalColor
+        });
+        
+        return writer;
+    }
+
+    
+    /*
+    * 汉字笔画拆分
+    */
+    
+    function renderFanningStrokes(target, strokes, bdColor,fontColor) {
+        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.style.width = '80px';
+        svg.style.height = '80px';
+//        svg.style.border = '1px solid ' + bdColor;
+//        svg.style.marginRight = '3px';
+        
+        $(svg).addClass("hzstyle");
+
+        target.appendChild(svg);
+        var group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+
+        // set the transform property on the g element so the character renders at 75x75
+        var transformData = HanziWriter.getScalingTransform(80, 80);
+        group.setAttributeNS(null, 'transform', transformData.transform);
+        svg.appendChild(group);
+
+        strokes.forEach(function(strokePath) {
+            var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttributeNS(null, 'd', strokePath);
+            // style the character paths
+            path.style.fill = fontColor;
+            group.appendChild(path);
+        });
+        
+        changeBackground();
+    }
+
+    function writeHanZiByStep(hzid,strHz){
+        HanziWriter.loadCharacterData(strHz).then(function(charData) {
+          var target = document.getElementById(hzid);
+          for (var i = 0; i < charData.strokes.length; i++) {
+            var strokesPortion = charData.strokes.slice(0, i + 1);
+            renderFanningStrokes(target, strokesPortion, "#BBB", "#777");
+          }
+        });
+    } 
+    
+    //改变字体背景图片
+    function changeBackground(){
+        var obj = $("input[name='bg']:checked");
+        var bg = "url(./images/" + $(obj).val() + ")";
+        //console.log(bg);
+        $(".hzstyle").css("background-image",bg);
+    }
+    
+    //调用打印
+    function printCTT(cttArear){
+        $(cttArear).print();            
+    }
+</script>

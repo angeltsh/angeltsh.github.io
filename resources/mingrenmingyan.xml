@@ -32,4 +32,12 @@
         </dimension>
 		<other>其他信息3</other>
 	</mrmy>
+    <mrmy>
+		<id>5</id>
+		<author>《增广贤文》</author>
+		<dimension>
+            良言一句三冬暖，恶语伤人六月寒。
+        </dimension>
+		<other>其他信息3</other>
+	</mrmy>
 </mrmys>
