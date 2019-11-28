@@ -394,6 +394,5 @@ function handleDataBase(req){
     req.db.close();
 }
 
-// 
-delDatabase("mydb");
-dataBaseWorking("mydb");
+// delDatabase("mydb");
+// dataBaseWorking("mydb");

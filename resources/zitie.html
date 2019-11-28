@@ -14,7 +14,7 @@
     <script src="../js/jQuery.print.min.js"></script>
     
     <style>
-        //打印带背景
+        //打印带背景Start
         @media print {
              body{
                 -webkit-print-color-adjust:exact;
@@ -23,6 +23,7 @@
                 print-color-adjust:exact;
             } 
         }
+        //打印带背景End
 
         .other{
             border: solid 1px #dce6f0;
@@ -154,8 +155,10 @@
 //         console.log(contents);
          var str = "";
          for(var i=0;i<contents.length;i++){
-             if(contents[i] =="\n"){
+             if(contents[i] == "\n"){
                  str += '<br>';
+             }else if(contents[i] == " "){
+                 continue;
              }else{
                  str += '<p class="zitie">';
                  str += '<span>'+contents[i]+'</span></p>';
