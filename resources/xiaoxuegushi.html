@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="UTF-8">
+<title>小学古诗背诵工具</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css" media="screen">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../stylesheets/github-light.css" media="screen">
+<script src="../js/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+<section class="main-content">
+    <div>
+        <h4>小学古诗背诵工具</h4>
+        <h6>-------积跬步，至千里</h6>
+        <pre><code></code></pre>
+    </div>
+    <div id="mrmy">
+        <div style="text-align: center;">
+            <button onclick="mrmy()">换一个</button>
+        </div>
+        <fieldset>
+            <legend>
+                <span id="mrmy_author">小学</span>
+            </legend>
+            <p>
+                <b id="mrmy_dimension">古诗</b>
+            </p>
+        </fieldset>
+	</div>
+  <footer class="site-footer" id="footer"> </footer>
+</section>
+</body>
+</html>
+<script>
+	$("#footer").load("../footer.html");
+
+	function mrmy() {
+        console.log("ok");
+		$.ajax({
+			url : './xiaoxuegushi.xml',
+			type : 'GET',
+			dataType : 'xml',
+			cache : false,
+			success : function(xml) {
+
+				var param = $(xml).find("mrmy");
+
+				var target = random(0, param.length);
+
+				console.log(target);
+				if ($(param[target])) {
+					var oid = $(param[target]).children("id").text();
+					var author = $(param[target]).children("author").text();
+					var dimension = $(param[target]).children("dimension")
+							.text();
+					var other = $(param[target]).children("other").text();
+
+					//var str = "<p>作者：<b>" + author + "</b></p>";
+					//str += "<p>内容：<b>" + dimension + "</b></p>";
+
+					$("#mrmy_author").html(author);
+					$("#mrmy_dimension").html(dimension);
+				}
+
+			}
+		});
+
+	}
+	mrmy();
+
+	function random(min, max) {
+		var rand = parseInt(Math.random() * (max - min) + min);
+		return rand;
+	}
+</script>
